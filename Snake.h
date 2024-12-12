@@ -4,6 +4,8 @@
 
 using std::vector;
 
+
+
 class Snake
 {
 	//sbodyのvector配列 body;
@@ -11,8 +13,9 @@ class Snake
 public:
 	//コンストラクタ
 	Snake();
-	~Snake();
 	//デストラクタ
+	~Snake();
+
 	void Init();
 	void Update(float delta);
 	void Draw(float delta);

@@ -21,3 +21,13 @@ pos sbody::GetPosition()
 {
     return sPos;
 }
+
+void sbody::SetDir(DIR dir)
+{
+    forward = dir;
+}
+
+DIR sbody::GetDir()
+{
+    return forward;
+}

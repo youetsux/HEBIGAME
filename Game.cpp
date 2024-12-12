@@ -44,10 +44,11 @@ void Game::UpdateTitle(float delta)
 void Game::UpdatePlay(float delta)
 {
 
-	if (Input::IsKeyDown(KEY_INPUT_SPACE))
-	{
-		stat = GAMESTATE::GAMEOVER;
-	}
+	snake.Update(delta);
+	//if (Input::IsKeyDown(KEY_INPUT_SPACE))
+	//{
+	//	stat = GAMESTATE::GAMEOVER;
+	//}
 }
 
 void Game::UpdateGameOver(float delta)
@@ -81,9 +82,9 @@ void Game::DrawTitle(float delta)
 
 void Game::DrawPlay(float delta)
 {
-	DrawStage(delta);
-	snake.Draw(delta);
-	DrawString(100, 100, "PLAY", GetColor(0, 0, 0));
+	DrawStage(delta);//ÉXÉeÅ[ÉWÇÃï`âÊ
+	snake.Draw(delta);//ÉwÉrÇÃï`âÊ
+	//DrawString(100, 100, "PLAY", GetColor(0, 0, 0));
 }
 
 void Game::DrawGameOver(float delta)

@@ -7,6 +7,10 @@ struct pos
 	int y;
 };
 
+enum DIR
+{
+	UP, LEFT, DOWN, RIGHT, NONE, MAXDIR
+};
 
 namespace
 {

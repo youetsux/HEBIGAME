@@ -23,6 +23,7 @@ public:
 	void DrawTitle(float delta);
 	void DrawPlay(float delta);
 	void DrawGameOver(float delta);
+
 	//ステージを描画する関数
 	void DrawStage(float delta);
 };
