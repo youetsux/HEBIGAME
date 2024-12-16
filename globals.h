@@ -19,8 +19,8 @@ namespace
 	
 	const int BOXSIZE = 40;
 	
-	const int STAGEW = WIN_WIDTH / BOXSIZE;
-	const int STAGEH = WIN_HEIGHT / BOXSIZE;
+	const int STAGEW = WIN_WIDTH / BOXSIZE -2;
+	const int STAGEH = WIN_HEIGHT / BOXSIZE - 3;
 	
 	int crrTime;
 	int prevTime;

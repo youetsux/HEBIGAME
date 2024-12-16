@@ -1,5 +1,6 @@
 #pragma once
 #include "Snake.h"
+#include "Foods.h"
 
 class Game
 {
@@ -8,6 +9,7 @@ class Game
 		TITLE, PLAY, GAMEOVER, MAXSTATE
 	};//各状態で、スペースキーを押したら次の状態に移動する
 	Snake snake;
+	Foods food;
 public:
 	Game();//コンストラクタ　初期化用関数
 	~Game();//デストラクタ   削除用関数

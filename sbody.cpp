@@ -13,8 +13,8 @@ sbody::~sbody()
 
 void sbody::SetPosition(int x, int y)
 {
-    this->sPos.x = x;
-    this->sPos.y = y;
+    sPos.x = x;
+    sPos.y = y;
 }
 
 pos sbody::GetPosition()

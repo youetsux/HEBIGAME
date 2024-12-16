@@ -15,6 +15,10 @@ void Game::Init()
 {
 	stat = GAMESTATE::TITLE;//かっこいい
 	snake.Init();
+	food.Init();
+	pos p = food.GetRandPos();
+	food.SetPosition(p.x, p.y);
+	
 }
 
 void Game::Update(float delta)//毎フレームのデータ更新処理
@@ -77,13 +81,14 @@ void Game::Draw(float delta)
 
 void Game::DrawTitle(float delta)
 {
-	DrawString(100, 100, "TITLE", GetColor(0,0,0));
+	DrawString(100, 100, "TITLE", GetColor(0, 0, 0));
 }
 
 void Game::DrawPlay(float delta)
 {
 	DrawStage(delta);//ステージの描画
 	snake.Draw(delta);//ヘビの描画
+	food.Draw(delta);//餌の描画
 	//DrawString(100, 100, "PLAY", GetColor(0, 0, 0));
 }
 
@@ -99,16 +104,20 @@ void Game::DrawStage(float delta)
 {
 	bool kigu = true;
 	//チェッカーボード模様を描いてみよう！
-	for (int j = 0; j < WIN_HEIGHT; j += BOXSIZE) {
+	for (int j = 0; j < STAGEH; j++) {
 		int boxnum = 0;
 		if (kigu == true)
 			boxnum++;
-		for (int i = 0; i < WIN_WIDTH; i+= BOXSIZE)
+		for (int i = 0; i < STAGEW; i++)
 		{
-			if (boxnum % 2) 
-				DrawBox(i, j, i + BOXSIZE, j + BOXSIZE, GetColor(230, 200, 240), TRUE);
+			if (boxnum % 2)
+				DrawBox(i * BOXSIZE, j * BOXSIZE,
+					   (i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+					   GetColor(230, 200, 240), TRUE);
 			else
-				DrawBox(i, j, i + BOXSIZE, j + BOXSIZE, GetColor(200, 200, 200), TRUE);
+				DrawBox(i * BOXSIZE, j * BOXSIZE,
+					   (i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+					   GetColor(200, 200, 200), TRUE);
 			boxnum++;
 		}
 		kigu = !kigu;
