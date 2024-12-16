@@ -10,6 +10,7 @@ class Snake
 {
 	//sbodyのvector配列 body;
 	vector<sbody> body;
+	bool isEat;//true, false
 public:
 	//コンストラクタ
 	Snake();
