@@ -39,8 +39,8 @@ pos Foods::GetPosition()
 
 pos Foods::GetRandPos()
 {
-    int rx = GetRand(STAGEW);
-    int ry = GetRand(STAGEH);
+    int rx = GetRand(STAGEW - 1);
+    int ry = GetRand(STAGEH - 1);
     pos result = { rx, ry };
     return result;
 }

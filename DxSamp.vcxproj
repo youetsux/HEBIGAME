@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Youetsu\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Youetsu\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

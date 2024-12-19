@@ -18,6 +18,11 @@ void Game::Init()
 	food.Init();
 	pos p = food.GetRandPos();
 	food.SetPosition(p.x, p.y);
+	while(snake.CheckOnBody(p))
+	{
+		p = food.GetRandPos();
+		food.SetPosition(p.x, p.y);
+	}
 	
 }
 
@@ -49,6 +54,13 @@ void Game::UpdatePlay(float delta)
 {
 
 	snake.Update(delta);
+	pos fpos = food.GetPosition();
+	pos hpos = snake.GetHeadPosition();
+	if (fpos.x == hpos.x && fpos.y == hpos.y)
+	{
+		snake.EatFood();
+		food.EatFood();
+	}
 	//if (Input::IsKeyDown(KEY_INPUT_SPACE))
 	//{
 	//	stat = GAMESTATE::GAMEOVER;

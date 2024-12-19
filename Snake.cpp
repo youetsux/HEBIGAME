@@ -87,6 +87,7 @@ void Snake::Update(float delta)
 
 	}
 	sumDelta = sumDelta + delta;
+
 }
 
 void Snake::Draw(float delta)
@@ -101,4 +102,22 @@ void Snake::Draw(float delta)
 			(p.x + 1) * BOXSIZE, (p.y + 1) * BOXSIZE,
 			GetColor(0, 0, 0), FALSE);
 	}
+}
+
+bool Snake::CheckOnBody(pos p)
+{
+	//for (int i = 0; i < body.size(); i++)
+	for(auto itr: body)
+	{
+		if (itr.GetPosition().x == p.x && itr.GetPosition().y == p.y)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void Snake::EatFood()
+{
+	isEat = true;
 }
