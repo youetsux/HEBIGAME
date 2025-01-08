@@ -22,9 +22,12 @@ void Foods::Update(float delta)
 
 void Foods::Draw(float delta)
 {
+    if (isEat)
+        return;//ëÅä˙ÉäÉ^Å[Éì
+
     DrawBox(position_.x * BOXSIZE, position_.y * BOXSIZE,
-        (position_.x + 1) * BOXSIZE, (position_.y + 1) * BOXSIZE,
-        GetColor(217,51,63), TRUE);
+            (position_.x + 1) * BOXSIZE, (position_.y + 1) * BOXSIZE,
+            GetColor(217, 51, 63), TRUE);
 }
 
 void Foods::SetPosition(int x, int y)
@@ -39,8 +42,8 @@ pos Foods::GetPosition()
 
 pos Foods::GetRandPos()
 {
-    int rx = GetRand(STAGEW - 1);
-    int ry = GetRand(STAGEH - 1);
+    int rx = GetRand(STAGEW - 3) + 1;
+    int ry = GetRand(STAGEH - 3) + 1;
     pos result = { rx, ry };
     return result;
 }

@@ -5,7 +5,7 @@
 namespace
 {
 	float sumDelta = 0;
-	const float refRate = 0.5f;
+	const float refRate = 0.25f;
 }
 
 Snake::Snake()
@@ -20,19 +20,46 @@ Snake::~Snake()
 
 void Snake::Init()
 {
+	body.clear();
 	//bodyを５こつくる
 	for (int i = 0; i < 5; i++)
-	{
+	{	
 		sbody b;
 		b.SetPosition(10 - i, 5);
 		b.SetDir(RIGHT);
 		this->body.push_back(b);
 	}
 	isEat = false;
+	isAlive = true;//ここで生きる
 }
 
 void Snake::Update(float delta)
 {
+	//自分のボディとの当たり判定
+	pos p = body[0].GetPosition();//頭の位置をゲット
+	for (int i = 1; i < body.size(); i++)
+	{
+		if (p.x == body[i].GetPosition().x && p.y == body[i].GetPosition().y)
+		{
+			isAlive = false;//ここで死ぬる
+		}
+	}
+
+	//壁との当たり判定
+	//すべての壁kabe.x, kabe.y に対して
+	//(p.x,p.y) == (kabe.x, kabe.y)なら ⇒ isAlive = false
+	for (int j = 0; j < STAGEH; j++) {
+		for (int i = 0; i < STAGEW; i++)
+		{
+			if (j == 0 || i == 0 || j == STAGEH - 1 || i == STAGEW - 1) {
+				if (p.x == i && p.y == j)
+				{
+					isAlive = false;//ここで死ぬる
+				}
+			}
+		}
+	}
+
 	DIR inputDir = NONE;
 	if (Input::IsKeyDown(KEY_INPUT_UP)) {
 		inputDir = UP;
@@ -102,6 +129,9 @@ void Snake::Draw(float delta)
 			(p.x + 1) * BOXSIZE, (p.y + 1) * BOXSIZE,
 			GetColor(0, 0, 0), FALSE);
 	}
+	//if (isAlive == false)
+	//	DrawFormatString(10, 50, GetColor(255, 0, 0), "Dead");
+
 }
 
 bool Snake::CheckOnBody(pos p)

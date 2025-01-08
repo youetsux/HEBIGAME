@@ -25,5 +25,6 @@ namespace
 	int crrTime;
 	int prevTime;
 	
-	
+	const int MGN_WIDTH = 100;
+	const int MGN_HEIGHT = 50;
 }

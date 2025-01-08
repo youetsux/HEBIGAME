@@ -19,10 +19,12 @@ public:
 	void Draw(float delta);
 	bool CheckOnBody(pos p);
 	void EatFood();
+	bool IsAlive() { return isAlive; }//¶‚«‚Ä‚éH
 	pos GetHeadPosition() { return(body[0].GetPosition()); }
 private:
 	//sbody‚Ìvector”z—ñ body;
 	vector<sbody> body;
 	bool isEat;//true, false
+	bool isAlive;
 };
 

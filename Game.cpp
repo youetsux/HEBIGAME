@@ -52,8 +52,12 @@ void Game::UpdateTitle(float delta)
 
 void Game::UpdatePlay(float delta)
 {
-
+	if (snake.IsAlive() == false) {
+		stat = GAMESTATE::GAMEOVER;
+		return;
+	}
 	snake.Update(delta);
+	//餌を食べる処理
 	pos fpos = food.GetPosition();
 	pos hpos = snake.GetHeadPosition();
 	if (fpos.x == hpos.x && fpos.y == hpos.y)
@@ -61,6 +65,21 @@ void Game::UpdatePlay(float delta)
 		snake.EatFood();
 		food.EatFood();
 	}
+
+	//餌が食べられた後だったら（餌のリスポーン）
+	if (food.IsEat() == true)
+	{
+		//food.Init();
+		pos p = food.GetRandPos();
+		food.SetPosition(p.x, p.y);
+		while (snake.CheckOnBody(p))
+		{
+			p = food.GetRandPos();
+			food.SetPosition(p.x, p.y);
+		}
+		food.PutFood();//餌をスタンバイ（isEatをfalseにしてるだけ）
+	}
+
 	//if (Input::IsKeyDown(KEY_INPUT_SPACE))
 	//{
 	//	stat = GAMESTATE::GAMEOVER;
@@ -72,6 +91,7 @@ void Game::UpdateGameOver(float delta)
 	if (Input::IsKeyDown(KEY_INPUT_SPACE))
 	{
 		stat = GAMESTATE::TITLE;
+		Init();
 	}
 }
 
@@ -133,5 +153,24 @@ void Game::DrawStage(float delta)
 			boxnum++;
 		}
 		kigu = !kigu;
+	}
+	DrawWall(delta);
+}
+
+void Game::DrawWall(float delta)
+{
+//R:170、G : 092、B : 063で壁を描く！
+	for (int j = 0; j < STAGEH; j++) {
+		for (int i = 0; i < STAGEW; i++)
+		{
+			if (j == 0 || i == 0 || j == STAGEH-1 || i == STAGEW -1) {
+				DrawBox(i * BOXSIZE, j * BOXSIZE,
+					(i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+					GetColor(170, 92, 63), TRUE);
+				DrawBox(i * BOXSIZE, j * BOXSIZE,
+					(i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+					GetColor(0, 0, 0), FALSE);
+			}
+		}
 	}
 }

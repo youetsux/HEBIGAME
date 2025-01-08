@@ -14,7 +14,7 @@ public:
 	Game();//コンストラクタ　初期化用関数
 	~Game();//デストラクタ   削除用関数
 	GAMESTATE stat;
-	void Init();
+	void Init();//ゲームの初期化
 	void Update(float delta);
 	//各状態のアップデート関数
 	void UpdateTitle(float delta);
@@ -28,5 +28,6 @@ public:
 
 	//ステージを描画する関数
 	void DrawStage(float delta);
+	void DrawWall(float delta);
 };
 
