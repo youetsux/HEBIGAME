@@ -10,6 +10,7 @@ class Game
 	};//各状態で、スペースキーを押したら次の状態に移動する
 	Snake snake;
 	Foods food;
+	int score;
 public:
 	Game();//コンストラクタ　初期化用関数
 	~Game();//デストラクタ   削除用関数

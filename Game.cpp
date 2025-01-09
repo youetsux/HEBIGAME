@@ -23,7 +23,7 @@ void Game::Init()
 		p = food.GetRandPos();
 		food.SetPosition(p.x, p.y);
 	}
-	
+	score = 0;
 }
 
 void Game::Update(float delta)//毎フレームのデータ更新処理
@@ -52,11 +52,15 @@ void Game::UpdateTitle(float delta)
 
 void Game::UpdatePlay(float delta)
 {
+	//ヘビが生きているかどうかの判定
 	if (snake.IsAlive() == false) {
 		stat = GAMESTATE::GAMEOVER;
 		return;
 	}
+
+	//ヘビのアップデート
 	snake.Update(delta);
+
 	//餌を食べる処理
 	pos fpos = food.GetPosition();
 	pos hpos = snake.GetHeadPosition();
@@ -64,6 +68,7 @@ void Game::UpdatePlay(float delta)
 	{
 		snake.EatFood();
 		food.EatFood();
+		score++;
 	}
 
 	//餌が食べられた後だったら（餌のリスポーン）
@@ -121,6 +126,14 @@ void Game::DrawPlay(float delta)
 	DrawStage(delta);//ステージの描画
 	snake.Draw(delta);//ヘビの描画
 	food.Draw(delta);//餌の描画
+	
+	int t = GetFontSize();
+	SetFontSize(40);
+	//ChangeFontType(DX_FONTTYPE_EDGE);
+	DrawFormatString(602, 52, GetColor(0, 0, 0), "SCORE:%03d", score);
+	DrawFormatString(600, 50, GetColor(0, 255, 0), "SCORE:%03d", score);
+	SetFontSize(t);
+	
 	//DrawString(100, 100, "PLAY", GetColor(0, 0, 0));
 }
 
@@ -143,12 +156,12 @@ void Game::DrawStage(float delta)
 		for (int i = 0; i < STAGEW; i++)
 		{
 			if (boxnum % 2)
-				DrawBox(i * BOXSIZE, j * BOXSIZE,
-					   (i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+				DrawBox(MGN_WIDTH + i * BOXSIZE, MGN_HEIGHT + j * BOXSIZE,
+					MGN_WIDTH + (i + 1) * BOXSIZE, MGN_HEIGHT + (j + 1) * BOXSIZE,
 					   GetColor(230, 200, 240), TRUE);
 			else
-				DrawBox(i * BOXSIZE, j * BOXSIZE,
-					   (i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+				DrawBox(MGN_WIDTH + i * BOXSIZE, MGN_HEIGHT + j * BOXSIZE,
+					MGN_WIDTH + (i + 1) * BOXSIZE, MGN_HEIGHT + (j + 1) * BOXSIZE,
 					   GetColor(200, 200, 200), TRUE);
 			boxnum++;
 		}
@@ -164,11 +177,11 @@ void Game::DrawWall(float delta)
 		for (int i = 0; i < STAGEW; i++)
 		{
 			if (j == 0 || i == 0 || j == STAGEH-1 || i == STAGEW -1) {
-				DrawBox(i * BOXSIZE, j * BOXSIZE,
-					(i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+				DrawBox(MGN_WIDTH + i * BOXSIZE, MGN_HEIGHT + j * BOXSIZE,
+					MGN_WIDTH + (i + 1) * BOXSIZE, MGN_HEIGHT + (j + 1) * BOXSIZE,
 					GetColor(170, 92, 63), TRUE);
-				DrawBox(i * BOXSIZE, j * BOXSIZE,
-					(i + 1) * BOXSIZE, (j + 1) * BOXSIZE,
+				DrawBox(MGN_WIDTH + i * BOXSIZE, MGN_HEIGHT + j * BOXSIZE,
+					MGN_WIDTH + (i + 1) * BOXSIZE, MGN_HEIGHT + (j + 1) * BOXSIZE,
 					GetColor(0, 0, 0), FALSE);
 			}
 		}

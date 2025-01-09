@@ -25,6 +25,9 @@ namespace
 	int crrTime;
 	int prevTime;
 	
-	const int MGN_WIDTH = 100;
-	const int MGN_HEIGHT = 50;
+	const int STAGE_DRAW_W = STAGEW * BOXSIZE;
+	const int STAGE_DRAW_H = STAGEH * BOXSIZE;
+
+	const int MGN_WIDTH = (WIN_WIDTH - STAGE_DRAW_W)/2;
+	const int MGN_HEIGHT = (WIN_HEIGHT - STAGE_DRAW_H)- BOXSIZE;
 }

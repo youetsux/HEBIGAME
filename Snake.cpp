@@ -35,6 +35,7 @@ void Snake::Init()
 
 void Snake::Update(float delta)
 {
+	//１．当たり判定をしてから
 	//自分のボディとの当たり判定
 	pos p = body[0].GetPosition();//頭の位置をゲット
 	for (int i = 1; i < body.size(); i++)
@@ -59,7 +60,7 @@ void Snake::Update(float delta)
 			}
 		}
 	}
-
+	//２．移動の処理に入る
 	DIR inputDir = NONE;
 	if (Input::IsKeyDown(KEY_INPUT_UP)) {
 		inputDir = UP;
@@ -113,6 +114,8 @@ void Snake::Update(float delta)
 		body.insert(body.begin(), b);
 
 	}
+
+
 	sumDelta = sumDelta + delta;
 
 }
@@ -122,11 +125,11 @@ void Snake::Draw(float delta)
 	for (int i = 0; i < body.size(); i++)
 	{
 		pos p = body[i].GetPosition();
-		DrawBox(p.x * BOXSIZE, p.y * BOXSIZE,
-			(p.x + 1) * BOXSIZE, (p.y + 1) * BOXSIZE,
+		DrawBox(MGN_WIDTH + p.x * BOXSIZE, MGN_HEIGHT + p.y * BOXSIZE,
+			MGN_WIDTH + (p.x + 1) * BOXSIZE, MGN_HEIGHT + (p.y + 1) * BOXSIZE,
 			GetColor(0, 255, 0), TRUE);
-		DrawBox(p.x * BOXSIZE, p.y * BOXSIZE,
-			(p.x + 1) * BOXSIZE, (p.y + 1) * BOXSIZE,
+		DrawBox(MGN_WIDTH + p.x * BOXSIZE, MGN_HEIGHT + p.y * BOXSIZE,
+			MGN_WIDTH + (p.x + 1) * BOXSIZE, MGN_HEIGHT + (p.y + 1) * BOXSIZE,
 			GetColor(0, 0, 0), FALSE);
 	}
 	//if (isAlive == false)
